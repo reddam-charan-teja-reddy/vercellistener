@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 
 const app = express();
 const runtime = 'edge';
+
 // Middleware to parse JSON bodies
 app.use(bodyParser.json());
 
