@@ -1,7 +1,15 @@
-const express = require('express');
-const app = express();
-app.use(express.json());
+export const config = {
+	runtime: 'edge', // Ensures it runs as an edge function.
+};
 
-app.get('/', (req, res) => res.send(req.body));
+export default async (req) => {
+	if (req.method === 'POST') {
+		const body = await req.json();
 
-module.exports = app;
+		console.log('Received error report:', body.error);
+
+		return new Response('Error report received', { status: 200 });
+	}
+
+	return new Response('Method Not Allowed', { status: 405 });
+};
