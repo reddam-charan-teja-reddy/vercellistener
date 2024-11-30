@@ -1,17 +1,9 @@
-export const config = {
-	runtime: 'edge',
-};
+const express = require('express');
+const app = express();
+app.use(express.json());
 
-export default async (req) => {
-	if (req.method === 'POST') {
-		const body = await req.json();
-		const { error } = body;
+app.get('/', (req, res) => res.send(req.body));
 
-		console.log('Received error report:');
-		console.log(error);
+app.listen(3000, () => console.log('Server ready on port 3000.'));
 
-		return new Response('Error report received', { status: 200 });
-	}
-
-	return new Response('Method not allowed', { status: 405 });
-};
+module.exports = app;
